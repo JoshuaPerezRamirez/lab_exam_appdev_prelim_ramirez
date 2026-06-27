@@ -1,8 +1,9 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
 import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -17,17 +18,21 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
       }}>
       <Tabs.Screen
-        name="index"
+        name="labexam"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Habit Tracker',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons size={28} name="assignment" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons size={28} name="search" color={color} />
+          ),
         }}
       />
     </Tabs>
