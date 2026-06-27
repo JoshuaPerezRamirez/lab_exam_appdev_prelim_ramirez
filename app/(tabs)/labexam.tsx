@@ -1,15 +1,5 @@
 import React, { useState, useMemo, useRef } from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-  Keyboard,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
+import {SafeAreaView, View, Text, TextInput, TouchableOpacity, FlatList, Keyboard, StyleSheet, StatusBar,} from 'react-native';
 
 const COLORS = {
   background: '#f3f4f6',
@@ -27,7 +17,6 @@ const COLORS = {
 
 type Category = 'Food' | 'Transpo' | 'Bills';
 type FilterOption = 'All' | Category;
-
 type Expense = {
   id: string;
   title: string;
@@ -54,16 +43,13 @@ const ExpenseCard: React.FC<ExpenseCardProps> = ({ expense, onDelete }) => {
   return (
     <View style={styles.expenseCard}>
       <Text style={styles.expenseEmoji}>{expense.emoji}</Text>
-
       <View style={styles.expenseInfo}>
         <Text style={styles.expenseTitle} numberOfLines={1}>
           {expense.title}
         </Text>
         <Text style={styles.expenseCategory}>{expense.category}</Text>
       </View>
-
       <Text style={styles.expenseAmount}>₱{expense.amount.toFixed(2)}</Text>
-
       <TouchableOpacity
         onPress={() => onDelete(expense.id)}
         style={styles.deleteButton}
@@ -122,9 +108,7 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('Food');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [activeFilter, setActiveFilter] = useState<FilterOption>('All');
-
   const listRef = useRef<FlatList<Expense>>(null);
-
   const filteredExpenses = useMemo(() => {
     if (activeFilter === 'All') return expenses;
     return expenses.filter((expense) => expense.category === activeFilter);
@@ -143,7 +127,6 @@ export default function App() {
   const handleAddExpense = () => {
     const trimmedTitle = titleInput.trim();
     const parsedAmount = parseFloat(amountInput);
-
     if (trimmedTitle.length === 0) {
       setErrorMessage('Please enter an item description.');
       return;
@@ -165,7 +148,6 @@ export default function App() {
     }
 
     setErrorMessage('');
-
     const newExpense: Expense = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       title: trimmedTitle,
@@ -175,7 +157,6 @@ export default function App() {
     };
 
     setExpenses((previousExpenses) => [newExpense, ...previousExpenses]);
-
     setTitleInput('');
     setAmountInput('');
     Keyboard.dismiss();
@@ -197,11 +178,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
-
       <View style={styles.header}>
         <Text style={styles.headerText}>My Expense Tracker</Text>
       </View>
-
       <View style={styles.container}>
         <FlatList
           ref={listRef}
@@ -227,7 +206,6 @@ export default function App() {
                 </Text>
                 <Text style={styles.totalValue}>₱{totalCost.toLocaleString()}</Text>
               </View>
-
               <View style={styles.formContainer}>
                 <TextInput
                   style={styles.input}
@@ -244,11 +222,9 @@ export default function App() {
                   onChangeText={setAmountInput}
                   keyboardType="numeric"
                 />
-
                 {errorMessage.length > 0 && (
                   <Text style={styles.errorText}>⚠ {errorMessage}</Text>
                 )}
-
                 <Text style={styles.sectionLabel}>SELECT CATEGORY:</Text>
                 <View style={styles.categoryRow}>
                   {ALL_CATEGORIES.map((category) => (
@@ -261,7 +237,6 @@ export default function App() {
                     />
                   ))}
                 </View>
-
                 <TouchableOpacity
                   style={[styles.addButton, !isFormValid && styles.addButtonDisabled]}
                   onPress={handleAddExpense}
@@ -270,7 +245,6 @@ export default function App() {
                   <Text style={styles.addButtonText}>+ Add Expense</Text>
                 </TouchableOpacity>
               </View>
-
               <Text style={styles.sectionLabel}>FILTER / SORT:</Text>
               <View style={styles.filterRow}>
                 {ALL_FILTERS.map((filter) => (
@@ -338,6 +312,11 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     marginBottom: 8,
+    backgroundColor: COLORS.card,  
+    borderWidth: 1,                 
+    borderColor: COLORS.border,     
+    borderRadius: 12,               
+    padding: 14,                    
   },
   input: {
     backgroundColor: COLORS.card,
@@ -390,14 +369,14 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   addButton: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.primary, 
     borderRadius: 10,
     paddingVertical: 14,
     alignItems: 'center',
-    marginBottom: 18,
+    marginBottom: 4,                  
   },
   addButtonDisabled: {
-    backgroundColor: COLORS.disabled,
+    backgroundColor: COLORS.primary,
   },
   addButtonText: {
     color: '#ffffff',
