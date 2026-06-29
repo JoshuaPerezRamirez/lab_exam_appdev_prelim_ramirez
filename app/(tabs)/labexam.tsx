@@ -245,7 +245,6 @@ export default function App() {
                   <Text style={styles.addButtonText}>+ Add Expense</Text>
                 </TouchableOpacity>
               </View>
-              <Text style={styles.sectionLabel}>FILTER / SORT:</Text>
               <View style={styles.filterRow}>
                 {ALL_FILTERS.map((filter) => (
                   <CategoryButton
